@@ -1,0 +1,960 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QDateTime>
+#include <QTimer>
+#include <QObject>
+#include <QDateTime>
+#include <QDebug>
+
+
+MainWindow::MainWindow(QWidget *parent) :
+     QMainWindow(parent),
+     ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),this,SLOT(myfunction()));
+    timer->start(1000);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+void MainWindow::myfunction()
+{
+    QTime time = QTime::currentTime();
+    QString time_text = time.toString("hh : mm : ss");
+    ui->ladel_date_time->setText(time_text);
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    ui->musique->show();
+    ui->GPS->hide();
+    ui->telephone->hide();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->GPS->show();
+    ui->musique->hide();
+    ui->telephone->hide();
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->telephone->show();
+    ui->GPS->hide();
+    ui->musique->hide();
+
+}
+
+void MainWindow::on_ble_bouton_clicked()
+{
+    ui->ble_frame->show();
+    ui->radio_frame->hide();
+}
+
+void MainWindow::on_radio_bouton_clicked()
+{
+   ui->ble_frame->hide();
+   ui->radio_frame->show();
+
+}
+
+
+
+
+
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+#include <QMainWindow>
+#include <QLibrary>
+#include <QDateTime>
+#include <QTimer>
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+public slots:
+    void myfunction();
+
+private slots:
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_clicked();
+
+
+
+    void on_pushButton_2_clicked();
+
+    void on_ble_bouton_clicked();
+
+    void on_radio_bouton_clicked();
+
+
+    void on_date_heure_textChanged();
+
+    void on_lcdNumber_2_overflow();
+
+
+private:
+    Ui::MainWindow *ui;
+    QTimer *timer;
+
+};
+#endif // MAINWINDOW_H
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(7, 78, 103)</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>24</width>
+    <height>24</height>
+   </size>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>114</width>
+      <height>473</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../Desktop/projet ecran voiture/icon/gps2.png</normaloff>../../Desktop/projet ecran voiture/icon/gps2.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>100</width>
+         <height>83</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>77</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>77</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Nirmala UI</family>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../Desktop/projet ecran voiture/icon/musique2.png</normaloff>../../Desktop/projet ecran voiture/icon/musique2.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>97</width>
+         <height>65</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>74</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../Desktop/projet ecran voiture/icon/telephoone.png</normaloff>../../Desktop/projet ecran voiture/icon/telephoone.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>100</width>
+         <height>70</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../Desktop/projet ecran voiture/icon/voiture.png</normaloff>../../Desktop/projet ecran voiture/icon/voiture.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../Desktop/projet ecran voiture/icon/parameter-icon-25.jpg</normaloff>../../Desktop/projet ecran voiture/icon/parameter-icon-25.jpg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>100</width>
+         <height>80</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="GPS">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>681</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>471</width>
+       <height>41</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>20</y>
+       <width>51</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../Desktop/projet ecran voiture/icon/cherhcher.png</normaloff>../../Desktop/projet ecran voiture/icon/cherhcher.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="telephone">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>681</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>110</y>
+       <width>161</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>telephone</string>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="autoRepeatDelay">
+      <number>307</number>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="musique">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>681</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QFrame" name="ble_frame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>671</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>290</y>
+        <width>71</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../Desktop/projet ecran voiture/icon/images-PhotoRoom.png</normaloff>../../Desktop/projet ecran voiture/icon/images-PhotoRoom.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>40</width>
+        <height>60</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_12">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>290</y>
+        <width>71</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../Desktop/projet ecran voiture/icon/téléchargement.png</normaloff>../../Desktop/projet ecran voiture/icon/téléchargement.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>40</width>
+        <height>60</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_11">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>290</y>
+        <width>71</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>2</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../Desktop/projet ecran voiture/icon/images1.png</normaloff>../../Desktop/projet ecran voiture/icon/images1.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>40</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="autoRepeatDelay">
+       <number>301</number>
+      </property>
+     </widget>
+     <widget class="QFrame" name="logo_album">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>80</y>
+        <width>271</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>10</y>
+        <width>221</width>
+        <height>51</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>551</width>
+       <height>88</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="ble_bouton">
+        <property name="baseSize">
+         <size>
+          <width>90</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../../Desktop/projet ecran voiture/icon/png-clipart-bluetooth-icon-bluetooth-logo.png</normalon>
+         </iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>90</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="radio_bouton">
+        <property name="baseSize">
+         <size>
+          <width>100</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../Desktop/projet ecran voiture/icon/radio.png</normaloff>../../Desktop/projet ecran voiture/icon/radio.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>90</width>
+          <height>60</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_13">
+        <property name="baseSize">
+         <size>
+          <width>100</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../Desktop/projet ecran voiture/icon/auxpng.png</normaloff>../../Desktop/projet ecran voiture/icon/auxpng.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>90</width>
+          <height>60</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../Desktop/projet ecran voiture/icon/parametre_audio.png</normaloff>../../Desktop/projet ecran voiture/icon/parametre_audio.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>90</width>
+          <height>60</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QFrame" name="radio_frame">
+     <property name="geometry">
+      <rect>
+       <x>-20</x>
+       <y>80</y>
+       <width>691</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>120</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>118</width>
+         <height>339</height>
+        </rect>
+       </property>
+       <widget class="QPushButton" name="RTL">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>RTL</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="RFM">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>40</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>RFM</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="NRJ">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>70</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::PreventContextMenu</enum>
+        </property>
+        <property name="text">
+         <string>NRJ</string>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>98</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="FUN_RADIO">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>130</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>FUN RADIO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="VIRJIN">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>100</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>VIRJIN</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_18">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>160</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_19">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>190</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_20">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>220</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_22">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>250</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_21">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>280</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QScrollBar" name="verticalScrollBar">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>20</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_23">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>310</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QLCDNumber" name="lcdNumber">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDial" name="dial">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>260</y>
+        <width>81</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <zorder>horizontalLayoutWidget</zorder>
+    <zorder>radio_frame</zorder>
+    <zorder>ble_frame</zorder>
+   </widget>
+   <widget class="QLabel" name="ladel_date_time">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>0</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>50</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>0</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="midLineWidth">
+     <number>0</number>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <zorder>telephone</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>GPS</zorder>
+   <zorder>ladel_date_time</zorder>
+   <zorder>musique</zorder>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+
